@@ -3,8 +3,10 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.converts.OracleTypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -53,6 +55,8 @@ public class CodeGenerator {
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
+        dsc.setTypeConvert(new MySqlTypeConvert());
+/*        //oracle的类型转换
         dsc.setTypeConvert(new OracleTypeConvert(){
             @Override
             public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
@@ -60,9 +64,13 @@ public class CodeGenerator {
                     System.out.println("转换类型：" + fieldType);
                     return DbColumnType.STRING;
                 }
+                if ( fieldType.toLowerCase().contains( "int" )) {
+                    System.out.println("转换类型：" + fieldType);
+                    return DbColumnType.INTEGER;
+                }
                 return (DbColumnType) super.processTypeConvert(globalConfig, fieldType);
             }
-        });
+        });*/
         mpg.setDataSource(dsc);
 
         // 包配置
